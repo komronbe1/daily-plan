@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>✅ Bajarilganlar</h2>
+
+{% for task in tasks %}
+<div class="task done">
+    <b>{{ task.title }}</b><br>
+    <small>{{ task.due_time }}</small><br><br>
+
+    <a class="btn" href="/toggle/{{ task.id }}/">🔄 Qayta ochish</a>
+    <a class="btn" href="/delete/{{ task.id }}/">🗑 O‘chirish</a>
+</div>
+{% empty %}
+<p>Hozircha yo‘q</p>
+{% endfor %}
+
+{% endblock %}

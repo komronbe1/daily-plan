@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task App</title>
+
+    <style>
+        body {
+            background: #0f172a;
+            color: white;
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        .task {
+            background: #1e293b;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+        }
+
+        .done {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        .btn {
+            margin-right: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .notif {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #22c55e;
+            padding: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>📋 Task Manager</h1>
+
+<a href="/">🏠 Home</a> |
+<a href="/completed/">📦 Bajarilganlar</a>
+
+<hr>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<a href="/add/">+ Qo‘shish</a>
+
+{% for task in tasks %}
+<div class="task {% if task.status == 'done' %}done{% endif %}"
+     data-time="{{ task.due_time|date:'c' }}"
+     data-id="{{ task.id }}"
+     data-status="{{ task.status }}">
+
+    {% if task.status == 'done' %}
+        <a href="/completed/">
+            <b>{{ task.title }}</b>
+        </a>
+    {% else %}
+        <b>{{ task.title }}</b>
+    {% endif %}
+
+    <br>
+    <small>{{ task.due_time }}</small>
+    <br><br>
+
+    <a class="btn" href="/toggle/{{ task.id }}/">✅</a>
+    <a class="btn" href="/delete/{{ task.id }}/">🗑</a>
+
+</div>
+{% empty %}
+<p>Vazifa yo‘q</p>
+{% endfor %}
+
+<script>
+function showNotification(text) {
+    let div = document.createElement("div");
+    div.className = "notif";
+    div.innerText = "🔔 " + text;
+
+    document.body.appendChild(div);
+
+    setTimeout(() => {
+        div.remove();
+    }, 3000);
+}
+
+document.querySelectorAll('.task').forEach(task => {
+    let due = new Date(task.dataset.time);
+    let now = new Date();
+
+    let diff = due - now;
+
+    if (diff > 0 && task.dataset.status === 'pending') {
+        setTimeout(() => {
+            showNotification(task.innerText);
+        }, diff);
+    }
+});
+</script>
+
+{% endblock %}
